@@ -1,0 +1,345 @@
+{
+    "data": {
+        "public_identifier": "mitesh-bediya-7a2318201",
+        "profile_pic_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/person/mitesh-bediya-7a2318201/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20241020%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20241020T093206Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d3de4fc0f3a202333f8556835776c9fba63f6c904326fdd0c119d33a58d7ce02",
+        "background_cover_image_url": null,
+        "first_name": "Mitesh",
+        "last_name": "Bediya",
+        "full_name": "Mitesh Bediya",
+        "follower_count": 1080,
+        "occupation": "International Sales Head at Rollence Granito",
+        "headline": "IIT MADRAS | International Sales Director@ Rollence Granito",
+        "summary": "At Rollence Granito, we've honed market research and analytical skills to streamline the export of premium porcelain tiles, ensuring quality and efficient logistics. Our commitment to customer satisfaction has cultivated lasting global partnerships and a robust network of clients. With a B.Tech from IIT Madras, our approach combines technical grounding with a deep understanding of market dynamics.\n\nPreviously at Kewez Porcelano, our strategic targeting and negotiations were pivotal in expanding our market presence. Leveraging Python for data analysis, we contributed to identifying lucrative opportunities and optimizing operations. This experience reinforced our dedication to fostering innovative solutions that bolster growth and profitability in the export trade.",
+        "country": "IN",
+        "country_full_name": "India",
+        "city": "Morbi",
+        "state": "Gujarat",
+        "experiences": [
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 9,
+                    "year": 2021
+                },
+                "ends_at": null,
+                "company": "Rollence Granito",
+                "company_linkedin_profile_url": "https://www.linkedin.com/company/82618026/",
+                "company_facebook_profile_url": null,
+                "title": "International Sales Head",
+                "description": "Currently overseeing an EXIM volume exceeding $3 million, I am actively engaged in B2B direct client meetings, domestic sales, and strategic future planning. My role is focused on driving growth and fostering long-term business relationships, while aligning with the evolving market dynamics and company goals.",
+                "location": "Morbi, Gujarat, India",
+                "logo_url": "https://media.licdn.com/dms/image/v2/D560BAQFSAmv8dVIF-A/company-logo_400_400/company-logo_400_400/0/1703156453447/rollence_granito_2020_logo?e=1735776000&v=beta&t=W5anAWRtafy6---Wg-jjigFv_hq1U_mTUupXI7mMPEE"
+            },
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 10,
+                    "year": 2023
+                },
+                "ends_at": {
+                    "day": 31,
+                    "month": 5,
+                    "year": 2024
+                },
+                "company": "Global Hyperloop Competition IITM",
+                "company_linkedin_profile_url": "https://www.linkedin.com/company/98825822/",
+                "company_facebook_profile_url": null,
+                "title": "Marketing Team",
+                "description": null,
+                "location": "Chennai, Tamil Nadu, India",
+                "logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQHZKthTKHDU8w/company-logo_400_400/company-logo_400_400/0/1709581670166?e=1735776000&v=beta&t=sMMY3zcNNLZMPjodpFeIjyxWofz5SBrgwhDUxLSf410"
+            },
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 3,
+                    "year": 2022
+                },
+                "ends_at": {
+                    "day": 30,
+                    "month": 11,
+                    "year": 2023
+                },
+                "company": "Kewez Porcelano",
+                "company_linkedin_profile_url": "https://www.linkedin.com/company/91059378/",
+                "company_facebook_profile_url": null,
+                "title": "Marketing Director",
+                "description": "Kewez Porcelano is a distinguished company, a leading exporter of ceramic tiles from India to the global market,\r\nand a wall and floor GVT/PGVT tiles trader in major North and North-East Zone of India.\r\n• Mine Major Role in this company is to make the import-export process smooth, especially in the negotiation of\r\nquality and price of ceramic tiles, payments terms & conditions, and generate revenue by strategically targeting\r\ncountries to promote our products to their importers and re-exporters and find genuine buyers in other countries",
+                "location": "Morbi, Gujarat, India",
+                "logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQGOmPKZXFOBiQ/company-logo_400_400/company-logo_400_400/0/1678815250560?e=1735776000&v=beta&t=DXaUHmWRevchJHjnmPAPpwvTbiLMRfW0LET3lyMa34s"
+            },
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 5,
+                    "year": 2023
+                },
+                "ends_at": {
+                    "day": 30,
+                    "month": 6,
+                    "year": 2023
+                },
+                "company": "Axis Bank",
+                "company_linkedin_profile_url": "https://www.linkedin.com/company/axis-bank",
+                "company_facebook_profile_url": null,
+                "title": "Business Analyst",
+                "description": "• Worked on the live project under CEO(Amit chaudhary) & VP, based on “Reputation Risk Management” in which we research all news on online\nmedia sites and end up with final insights as to which company takes action against fraud articles using ML and AI.\n• Developed a technique to distinguish negative articles using the finBERT model and did topic modeling on\nnegative articles using the LDA model with the help of LLMs models.\n• Worked on the second project for making hiring process smooth, developed Resume Screener According to the\ncompany’s job profile and requirements which also generates questions for candidates according to their resumes.\n• At the end of the internship, I was offered the PPO for generating very useful insights for the BIU team.",
+                "location": "Bengaluru, Karnataka, India",
+                "logo_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/company/axis-bank/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20241020%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20241020T093206Z&X-Amz-Expires=1800&X-Amz-SignedHeaders=host&X-Amz-Signature=9e14f15c78d22343561ec926e73fccf5ec6593da223d80ef5b4c7ec1b4af1aa8"
+            },
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 6,
+                    "year": 2022
+                },
+                "ends_at": {
+                    "day": 31,
+                    "month": 3,
+                    "year": 2023
+                },
+                "company": "International and Alumni Relations Student Council, IIT Madras",
+                "company_linkedin_profile_url": "https://www.linkedin.com/company/iar-student-council-iit-madras",
+                "company_facebook_profile_url": null,
+                "title": "Head of International and Alumni Relations Team Web Operations",
+                "description": "Leading the team and developing real world products for better communication between other colleges and help students to connect with alumni across world.\n\n• Recruited and Led and managed team of students in WebOperations,trained them about new technologies, and\r\ngive tasks of real-world projects for making the International Alumina Relation Cell process smoother.\r\n• Successfully Delievered an IAR Website, chennai36 website using Ghost Headless CMS and AWS Lightsail.\r\nWorked on different projects of other vertices for their requirements accordingly.",
+                "location": "Chennai, Tamil Nadu, India",
+                "logo_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/company/iar-student-council-iit-madras/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20241020%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20241020T093206Z&X-Amz-Expires=1800&X-Amz-SignedHeaders=host&X-Amz-Signature=65cffb8e8f8ab0e9d2a9adbb367b6000a2dba9cfb616ead3beb60b71447bac38"
+            },
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 5,
+                    "year": 2021
+                },
+                "ends_at": {
+                    "day": 30,
+                    "month": 4,
+                    "year": 2022
+                },
+                "company": "Shaastra, IIT Madras",
+                "company_linkedin_profile_url": "https://www.linkedin.com/company/shaastra-iit-madras",
+                "company_facebook_profile_url": null,
+                "title": "Coordinator",
+                "description": "Coordinated One of largest Tech event Shaastra in India, developed tools which helps to connect students across India and increased number of outreach throughout globe 🌎",
+                "location": "India",
+                "logo_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/company/shaastra-iit-madras/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20241020%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20241020T093206Z&X-Amz-Expires=1800&X-Amz-SignedHeaders=host&X-Amz-Signature=2064b8fabc1ea8523e03eceb49d9843690aee0d0aaf3aabdf030f79830ce8c61"
+            }
+        ],
+        "education": [
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 1,
+                    "year": 2020
+                },
+                "ends_at": {
+                    "day": 31,
+                    "month": 12,
+                    "year": 2024
+                },
+                "field_of_study": "Civil Engineering",
+                "degree_name": "B.tech",
+                "school": "Indian Institute of Technology, Madras",
+                "school_linkedin_profile_url": "https://www.linkedin.com/company/157267/",
+                "school_facebook_profile_url": null,
+                "description": null,
+                "logo_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/company/reachiitm/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20241020%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20241020T093206Z&X-Amz-Expires=1800&X-Amz-SignedHeaders=host&X-Amz-Signature=292cf0aff5be1b58b97b667380974291c6aff036500c8a75d05b9e8648ecdc71",
+                "grade": null,
+                "activities_and_societies": null
+            },
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 7,
+                    "year": 2018
+                },
+                "ends_at": {
+                    "day": 31,
+                    "month": 5,
+                    "year": 2020
+                },
+                "field_of_study": null,
+                "degree_name": "Higher Education/Higher Education Administration",
+                "school": "Navyug Science School ",
+                "school_linkedin_profile_url": "https://www.linkedin.com/company/15129319/",
+                "school_facebook_profile_url": null,
+                "description": null,
+                "logo_url": "https://s3.us-west-000.backblazeb2.com/proxycurl/company/navyug-science-college/profile?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0004d7f56a0400b0000000001%2F20241020%2Fus-west-000%2Fs3%2Faws4_request&X-Amz-Date=20241020T093206Z&X-Amz-Expires=1800&X-Amz-SignedHeaders=host&X-Amz-Signature=e214189382c69dcdea21a824e151b29c626dbc255589df3688459fdd9f144adf",
+                "grade": "A2",
+                "activities_and_societies": null
+            }
+        ],
+        "languages": [],
+        "languages_and_proficiencies": [],
+        "accomplishment_organisations": [],
+        "accomplishment_publications": [],
+        "accomplishment_honors_awards": [],
+        "accomplishment_patents": [],
+        "accomplishment_courses": [
+            {
+                "name": "Advanced Algorithms in Computation geometry",
+                "number": "ED5340"
+            },
+            {
+                "name": "Data Science: Theory and Practice",
+                "number": "ED5340"
+            },
+            {
+                "name": "Money, Banking and Financial Markets",
+                "number": "HS5340"
+            },
+            {
+                "name": "Principles of Economics",
+                "number": "HS3002D"
+            }
+        ],
+        "accomplishment_projects": [],
+        "accomplishment_test_scores": [],
+        "volunteer_work": [],
+        "certifications": [
+            {
+                "starts_at": {
+                    "day": 1,
+                    "month": 5,
+                    "year": 2024
+                },
+                "ends_at": null,
+                "name": "Advanced Financial Instruments for Suistnable business and Decentralized Markets",
+                "license_number": "NPTEL24MG65S1253505644",
+                "display_source": null,
+                "authority": "NPTEL",
+                "url": null
+            }
+        ],
+        "connections": 1025,
+        "people_also_viewed": [
+            {
+                "link": "https://www.linkedin.com/in/sandeep-yadav-0833294b?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAAqMcyMB6w4Etxh5YH0d3HMbitVON904vg8",
+                "name": "sandeep yadav",
+                "summary": "Zonal manager at Somany ceramics",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/robert-cooper-asia-pacific-ceramics-319665283?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAET5gYUBXVXM6IDTUv2wJ1fl-0Y40E_AkV4",
+                "name": "Robert Cooper (Asia Pacific Ceramics)",
+                "summary": "Export Marketing Manager at Asia Pacific Ceramics",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/darshanadeo347?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADi9FTcBBms5heHAVklZDhfl_GzqITvq0qc",
+                "name": "Darshana Deo",
+                "summary": "Final year, B.Tech in Aerospace Engineering at IIT Madras",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/yashika-sahu-7b6656259?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAD-iWfoBSlZX26dJNrF8zRxosk6v3r7tJYY",
+                "name": "Yashika Sahu",
+                "summary": "Director @InstiBuzz || Head of Development and Association, E-Cell IIT Madras || Undergrad at IITM",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/aditya--c?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADR5fZoBhQNSVi4tnBTIkyutdTyWvwGa9B0",
+                "name": "Aditya C",
+                "summary": "Quantitative Trader at Jane Street | IIT Madras CSE '24",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/ved-korde-59a7182a9?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAEpSrkYBpXCdvr9lc-XY9NsBqKFXIIjxM-Q",
+                "name": "Ved Korde",
+                "summary": "Sophomore at Indian Institute of Technology, Madras",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/daveaastha?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAAERWKqUBOgQq76VYajFbtKLxa2M4fLvhGHA",
+                "name": "Aastha Dave",
+                "summary": "Undergraduate at IIT Madras",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/drashti-jajodia-5605041b9?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADLMahgBUYbvtIUlAfR-kILaboY4gP7C5e8",
+                "name": "Drashti Jajodia",
+                "summary": "Analyst @Deloitte | IIT MADRAS",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/mvaja13?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADTgVVABBwnZOk2QtTH4hLKKLtWD5uxwU3I",
+                "name": "Gautam Vaja",
+                "summary": "Software Engineer @JPMorgan Chase & Co. | IIT Madras’24 EE",
+                "location": null
+            },
+            {
+                "link": "https://www.linkedin.com/in/shreepoornasrao?miniProfileUrn=urn%3Ali%3Afs_miniProfile%3AACoAADL6pTIBR8R7CqiZ-j7VM7yZtEExSvpazWE",
+                "name": "Shreepoorna S Rao",
+                "summary": "Building Arctus Aerospace | Undergraduate | IIT Madras | EV Fellow",
+                "location": null
+            }
+        ],
+        "recommendations": [],
+        "activities": [],
+        "similarly_named_profiles": [],
+        "articles": [],
+        "groups": [
+            {
+                "profile_pic_url": "https://media.licdn.com/dms/image/v2/C4E07AQF46LuIu4Mscw/group-logo_image-shrink_400x400/group-logo_image-shrink_400x400/0/1630998316265?e=1728388800&v=beta&t=WJuOOS33IgpEYaIX_int2Y81dGacC2Kav3a1ZBvtk9I",
+                "name": " PROFESIONALES DE LA CONSTRUCCIÓN  Comunidad de Madrid ",
+                "url": "https://www.linkedin.com/groups/4542740"
+            },
+            {
+                "profile_pic_url": null,
+                "name": "Ceramic- Porcelain Tiles Importer/Exporter Group",
+                "url": "https://www.linkedin.com/groups/3991779"
+            }
+        ],
+        "skills": [
+            "Analytical Skills",
+            "Python (Programming Language)",
+            "Market Research",
+            "Data Analysis",
+            "Quantitative Research",
+            "Financial Analysis",
+            "Marketing Strategy",
+            "Server Side",
+            "Back-end Operations",
+            "Node.js",
+            "Algorithms Development ",
+            "Algorithmic Trading",
+            "MERN Stack",
+            "Software Development",
+            "Derivatives",
+            "Options Strategies",
+            "Options",
+            "Derivatives Trading",
+            "Equity Trading",
+            "Securities",
+            "Quantitative Finance",
+            "Trading",
+            "Risk Management",
+            "Equity Derivatives",
+            "Start-up Leadership",
+            "Start-up Ventures",
+            "Digital Marketing",
+            "Sourcing",
+            "Business Strategy",
+            "Artificial Intelligence (AI)",
+            "Machine Learning",
+            "Export",
+            "JavaScript",
+            "Team Leadership",
+            "C++",
+            "Microsoft Excel",
+            "Linux",
+            "Project Management",
+            "Team Management",
+            "Full-Stack Development"
+        ],
+        "inferred_salary": null,
+        "gender": null,
+        "birth_date": null,
+        "industry": null,
+        "extra": null,
+        "interests": [],
+        "personal_emails": [],
+        "personal_numbers": []
+    }
+}
