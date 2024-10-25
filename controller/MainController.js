@@ -78,7 +78,7 @@ function MainContoller() {
             .catch((err) => {
               return res
                 .status(500)
-                .json({ message: "Internal server error!" });
+                .json({ message: "Internal server error!" + err.message});
             });
         } catch (error) {
           return res.status(500).json({ message: "Internal Server Error" });
@@ -86,29 +86,35 @@ function MainContoller() {
       }
     },
     async matcher(req, res) {
+      const {linkedin_url,room_id} = req.body;
       try {
-        const data_lake = await Users.find();
+        const data_lake = await Users.find({room_id});
+        const main_user_about = await Users.find({linkedin_url});
         if (data_lake.length < 1) {
           return res
             .status(404)
             .json({ message: "No users in the data lake!" });
         } else {
-          var arr = [];
           var abouts = [];
           var names = [];
           var linkedin_urls = [];
           for (let i = 0; i < data_lake.length; i++) {
-            abouts.push(data_lake[i].about);
-            names.push(data_lake[i].name);
-            linkedin_urls.push(data_lake[i].linkedin_url);
+            if(data_lake[i].linkedin_url !== linkedin_url){
+              abouts.push(data_lake[i].about);
+              names.push(data_lake[i].name);
+              linkedin_urls.push(data_lake[i].linkedin_url);
+            }
           }
+          // console.log(main_user_about);
+          
           let similarityMatrix;
           await use.load().then(async (model) => {
             const data = (await model.embed(abouts)).arraySync();
-            similarityMatrix = math.zeros(data.length,data.length);
-            for (let i = 0; i < data.length; i++) {
-              for (let j = 0; j < data.length; j++) {
-                similarityMatrix.set([i, j], math.dot(data[i], data[j]) / (math.norm(data[i]) * math.norm(data[j])));
+            const user = (await model.embed(main_user_about[0].about)).arraySync();
+            similarityMatrix = math.zeros(1,abouts.length);
+            for (let i = 0; i < 1; i++) {
+              for (let j = 0; j < abouts.length; j++) {
+                similarityMatrix.set([i, j], math.dot(user[i], data[j]) / (math.norm(user[i]) * math.norm(data[j])));
               }
             }
             return res.status(200).json({ 'matrix': similarityMatrix, 'name':names, 'linkedin_url':linkedin_urls });
