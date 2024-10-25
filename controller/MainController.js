@@ -1,9 +1,9 @@
+require('@tensorflow/tfjs');
 const Users = require("../models/Users");
-const axios = require("axios");
 const userdata = require("../data.json");
 const keyword_extractor = require("keyword-extractor");
 const use = require("@tensorflow-models/universal-sentence-encoder");
-const math = require('mathjs');
+const math = require("mathjs");
 
 function MainContoller() {
   return {
@@ -76,7 +76,7 @@ function MainContoller() {
             .catch((err) => {
               return res
                 .status(500)
-                .json({ message: "Internal server error!" + err.message});
+                .json({ message: "Internal server error!" + err.message });
             });
         } catch (error) {
           return res.status(500).json({ message: "Internal Server Error" });
@@ -84,45 +84,65 @@ function MainContoller() {
       }
     },
     async matcher(req, res) {
-      const {linkedin_url,room_id} = req.body;
+      const { linkedin_url, room_id } = req.body;
+      var abouts = [];
+      var names = [];
+      var linkedin_urls = [];
+      let data_lake,main_user_about;
       try {
-        const data_lake = await Users.find({room_id});
-        const main_user_about = await Users.find({linkedin_url});
+        data_lake = await Users.find({ room_id });
+        main_user_about = await Users.find({ linkedin_url });
         if (data_lake.length < 1) {
           return res
             .status(404)
             .json({ message: "No users in the data lake!" });
         } else {
-          var abouts = [];
-          var names = [];
-          var linkedin_urls = [];
           for (let i = 0; i < data_lake.length; i++) {
-            if(data_lake[i].linkedin_url !== linkedin_url){
+            if (data_lake[i].linkedin_url !== linkedin_url) {
               abouts.push(data_lake[i].about);
               names.push(data_lake[i].name);
               linkedin_urls.push(data_lake[i].linkedin_url);
             }
           }
-          // console.log(main_user_about);
-          
-          let similarityMatrix;
-          await use.load().then(async (model) => {
-            const data = (await model.embed(abouts)).arraySync();
-            const user = (await model.embed(main_user_about[0].about)).arraySync();
-            similarityMatrix = math.zeros(1,abouts.length);
-            for (let i = 0; i < 1; i++) {
-              for (let j = 0; j < abouts.length; j++) {
-                similarityMatrix.set([i, j], math.dot(user[i], data[j]) / (math.norm(user[i]) * math.norm(data[j])));
-              }
-            }
-            return res.status(200).json({ 'matrix': similarityMatrix, 'name':names, 'linkedin_url':linkedin_urls });
-          });
         }
-        // return res.status(200).json({ message: data_lake });
       } catch (error) {
         return res
           .status(500)
-          .json({ message: "Internal Server Error " + error.message });
+          .json({ message: "Internal Server Error " + error });
+      }
+
+      let similarityMatrix;
+      try {
+        await use.load().then(async(model) => {
+          let data, user;
+          try {
+            data = (await model.embed(abouts)).arraySync();
+            user = (await model.embed(main_user_about[0].about)).arraySync();
+          } catch (error) {
+            return res.status(500).json({ message: "Internal server error" });
+          }
+          similarityMatrix = math.zeros(1, abouts.length);
+          for (let i = 0; i < 1; i++) {
+            for (let j = 0; j < abouts.length; j++) {
+              similarityMatrix.set(
+                [i, j],
+                math.dot(user[i], data[j]) /
+                  (math.norm(user[i]) * math.norm(data[j]))
+              );
+            }
+          }
+          return res
+            .status(200)
+            .json({
+              matrix: similarityMatrix,
+              name: names,
+              linkedin_url: linkedin_urls,
+            });
+        });
+      } catch (error) {
+        return res
+          .status(500)
+          .json({ message: "Internal Serve1r Error " + error });
       }
     },
   };
