@@ -1,4 +1,3 @@
-require("@tensorflow/tfjs");
 const Users = require("../models/Users");
 const axios = require("axios");
 const userdata = require("../data.json");
