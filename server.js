@@ -6,7 +6,7 @@ const app = express();
 const db = require('./config/db');
 const cors = require('cors');
 let Corsoption = {
-    origin: ['http://localhost:3000','*']
+    origin: ['http://localhost:3000','*','https://curious-empanada-e6f002.netlify.app']
 };
 app.use(cors(Corsoption));
 db();
