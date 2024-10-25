@@ -5,7 +5,10 @@ const PORT = process.env.PORT
 const app = express();
 const db = require('./config/db');
 const cors = require('cors');
-app.use(cors(['http://localhost:3000','*']));
+let Corsoption = {
+    origin: ['http://localhost:3000','*']
+};
+app.use(cors(Corsoption));
 db();
 const router = require('./routes/web');
 
