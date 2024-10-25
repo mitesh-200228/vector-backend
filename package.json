@@ -25,7 +25,7 @@
     "nodemon": "^3.1.7"
   },
   "resolutions": {
-    "string-width": "4.2.3",
-    "wrap-ansi": "7.0.0"
+    "string-width": "5.1.2",
+    "wrap-ansi": "8.1.0"
  }
 }
