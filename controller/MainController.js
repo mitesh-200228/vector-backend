@@ -3,7 +3,6 @@ const axios = require("axios");
 const userdata = require("../data.json");
 const keyword_extractor = require("keyword-extractor");
 const use = require("@tensorflow-models/universal-sentence-encoder");
-// const tf = require('@tensorflow/tfjs-node');
 const math = require('mathjs');
 
 function MainContoller() {
