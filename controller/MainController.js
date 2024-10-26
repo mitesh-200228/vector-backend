@@ -1,9 +1,8 @@
-require('@tensorflow/tfjs');
 const Users = require("../models/Users");
 const userdata = require("../data.json");
 const keyword_extractor = require("keyword-extractor");
-const use = require("@tensorflow-models/universal-sentence-encoder");
 const math = require("mathjs");
+const axios = require("axios");
 
 function MainContoller() {
   return {
@@ -88,9 +87,12 @@ function MainContoller() {
       var abouts = [];
       var names = [];
       var linkedin_urls = [];
-      let data_lake,main_user_about;
+      let data_lake, main_user_about;
       try {
         data_lake = await Users.find({ room_id });
+        if(!data_lake){
+          return res.status(200).json({message:'No One is the room!'});
+        }
         main_user_about = await Users.find({ linkedin_url });
         if (data_lake.length < 1) {
           return res
@@ -110,39 +112,38 @@ function MainContoller() {
           .status(500)
           .json({ message: "Internal Server Error " + error });
       }
-
-      let similarityMatrix;
+      const sentences = abouts;
+      function cosineSimilarity(vecA, vecB) {
+        const dotProduct = vecA.reduce((sum, a, idx) => sum + a * vecB[idx], 0);
+        const magnitudeA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
+        const magnitudeB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
+        return dotProduct / (magnitudeA * magnitudeB);
+      }
+      let x = abouts;
+      x.push(main_user_about[0].about);
       try {
-        await use.load().then(async(model) => {
-          let data, user;
-          try {
-            data = (await model.embed(abouts)).arraySync();
-            user = (await model.embed(main_user_about[0].about)).arraySync();
-          } catch (error) {
-            return res.status(500).json({ message: "Internal server error" });
-          }
-          similarityMatrix = math.zeros(1, abouts.length);
-          for (let i = 0; i < 1; i++) {
-            for (let j = 0; j < abouts.length; j++) {
-              similarityMatrix.set(
-                [i, j],
-                math.dot(user[i], data[j]) /
-                  (math.norm(user[i]) * math.norm(data[j]))
-              );
-            }
-          }
-          return res
-            .status(200)
-            .json({
-              matrix: similarityMatrix,
-              name: names,
-              linkedin_url: linkedin_urls,
-            });
-        });
+        const embeddings = await Promise.all(
+          sentences.map(async (sentence) => {
+            const response = await axios.post(
+              "https://api.openai.com/v1/embeddings",
+              { model: "text-embedding-ada-002", input: sentence },
+              {
+                headers: {
+                  Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+                },
+              }
+            );
+            return response.data.data[0].embedding;
+          })
+        );
+        const similarityMatrix = embeddings.map((embeddingA) =>
+          cosineSimilarity(embeddings[embeddings.length - 1],embeddingA)
+        );
+        return res.status(200).json({ matrix: similarityMatrix, names });
       } catch (error) {
-        return res
+        res
           .status(500)
-          .json({ message: "Internal Serve1r Error " + error });
+          .json({ error: "Failed to calculate similarity matrix." + error });
       }
     },
   };
