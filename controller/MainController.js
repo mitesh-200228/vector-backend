@@ -112,7 +112,7 @@ function MainContoller() {
         main_user_about = await Users.find({ linkedin_url });
         if (data_lake.length < 1) {
           return res
-            .status(404)
+            .status(200)
             .json({ message: "No users in the data lake!" });
         } else {
           for (let i = 0; i < data_lake.length; i++) {
