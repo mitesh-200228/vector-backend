@@ -108,10 +108,7 @@ function MainContoller() {
       var linkedin_urls = [];
       let data_lake, main_user_about;
       try {
-        data_lake = await Users.find({ room_id });
-        if (!data_lake) {
-          return res.status(200).json({ message: "No One is the room!" });
-        }
+        data_lake = await Users.find({ room_id });        
         main_user_about = await Users.find({ linkedin_url });
         if (data_lake.length < 1) {
           return res
