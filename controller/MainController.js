@@ -128,7 +128,6 @@ function MainContoller() {
           .status(500)
           .json({ message: "Internal Server Error " + error });
       }
-
       // const sentences = abouts;
       function cosineSimilarity(vecA, vecB) {
         const dotProduct = vecA.reduce((sum, a, idx) => sum + a * vecB[idx], 0);
@@ -137,13 +136,10 @@ function MainContoller() {
         return dotProduct / (magnitudeA * magnitudeB);
       }
       const x = abouts;
-      if(main_user_about[0].about === null){
-        return res.status(404).json({message:'We dont have your enough data to show the result'});
-      }
       x.push(main_user_about[0].about);
-      var embedding_f = [];
+
       try {
-        await Promise.all(
+        const embeddings = await Promise.all(
           x.map(async (sentence) => {
             const response = await axios.post(
               "https://api.openai.com/v1/embeddings",
@@ -154,17 +150,18 @@ function MainContoller() {
                 },
               }
             );
-            embedding_f.push(response.data.data[0].embedding);
             return response.data.data[0].embedding;
           })
         );
-        const similarityMatrix = embedding_f.map((embeddingA) =>
-          cosineSimilarity(embedding_f[embedding_f.length - 1], embeddingA)
+        // console.log(embeddings);
+        
+        const similarityMatrix = embeddings.map((embeddingA) =>
+          cosineSimilarity(embeddings[embeddings.length - 1], embeddingA)
         );
         return res.status(200).json({ matrix: similarityMatrix, names });
       } catch (error) {
         return res.status(500).json({
-          error: "Failed to calculate similarity matrix." + error.message,
+          error: "Failed to calculate similarity matrix. " + error.message,
         });
       }
     },
