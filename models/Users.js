@@ -15,7 +15,7 @@ const Users = new mongoose.Schema({
     },
     about:{
         type: String,
-        required: true,
+        required: false,
     },
     room_id: {
         type: String,

@@ -40,8 +40,6 @@ function MainContoller() {
                 const userdata_database = await axios.get(api_endpoint, (config = configuration));
                 userdata = userdata_database;
               } catch (error) {
-                console.log(error);
-
                 return res
                   .status(500)
                   .json({ message: "Internal server error: " + error });
@@ -67,7 +65,6 @@ function MainContoller() {
                 return_changed_case: true,
                 remove_duplicates: false,
               });
-
               async function triggers() {
                 await Users.create({
                   name: userdata.data.full_name,
