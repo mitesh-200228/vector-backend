@@ -1,5 +1,5 @@
 const Users = require("../models/Users");
-const userdata = require("../data.json");
+// const userdata = require("../data.json");
 const keyword_extractor = require("keyword-extractor");
 const math = require("mathjs");
 const axios = require("axios");
@@ -9,7 +9,7 @@ const { default: mongoose } = require("mongoose");
 function MainContoller() {
   return {
     async model(req, res) {
-      // let userdata;
+      let userdata;
       const { linkedinurl, room_id } = req.body;
       if (!linkedinurl || !room_id) {
         return res
@@ -18,7 +18,7 @@ function MainContoller() {
       }
       try {
         await Rooms.findById(`${room_id}`)
-          .then((data) => {
+          .then(async(data) => {
             if (data.length < 1) {
               return res.status(404).json({ message: "Wrong Room Number" });
             } else {
@@ -36,16 +36,16 @@ function MainContoller() {
                 },
                 params: params,
               };
-              // try {
-              //   const userdata_database = await axios.get(api_endpoint, (config = configuration));
-              //   userdata = userdata_database;
-              // } catch (error) {
-              //   console.log(error);
+              try {
+                const userdata_database = await axios.get(api_endpoint, (config = configuration));
+                userdata = userdata_database;
+              } catch (error) {
+                console.log(error);
 
-              //   return res
-              //     .status(500)
-              //     .json({ message: "Internal server error: " + error });
-              // }
+                return res
+                  .status(500)
+                  .json({ message: "Internal server error: " + error });
+              }
             }
             const about = userdata.data.summary;
             if (Object.keys(userdata.data).length <= 3) {
