@@ -116,7 +116,12 @@ function MainContoller() {
             .json({ message: "No users in the data lake!" });
         } else {
           for (let i = 0; i < data_lake.length; i++) {
+            console.log(data_lake[i]);
+            console.log(main_user_about[i]);
+
             if (data_lake[i].linkedin_url !== linkedin_url) {
+              console.log(data_lake[i]);
+
               abouts.push(data_lake[i].about);
               names.push(data_lake[i].name);
               linkedin_urls.push(data_lake[i].linkedin_url);
@@ -184,83 +189,80 @@ function MainContoller() {
         const datas = await Users.find({ linkedin_url });
         let linkedinurl = linkedin_url;
 
-        if (datas == [] || datas === NaN || datas === null) {
+        // if (datas == [] || datas === NaN || datas === null) {
+        try {
+          let api_endpoint = "https://nubela.co/proxycurl/api/v2/linkedin";
+          let api_key = "yYRj_nqzmPVJwTF5bC7OCA";
+          let params = {
+            url: linkedinurl,
+            skills: "include",
+          };
+
+          let configuration = {
+            headers: {
+              Authorization: `Bearer ${api_key}`, // ProxyCurl API key
+              "Content-Type": "application/json",
+            },
+            params: params,
+          };
+          let userdata;
           try {
-            let api_endpoint = "https://nubela.co/proxycurl/api/v2/linkedin";
-            let api_key = "yYRj_nqzmPVJwTF5bC7OCA";
-            let params = {
-              url: linkedinurl,
-              skills: "include",
-            };
-
-            let configuration = {
-              headers: {
-                Authorization: `Bearer ${api_key}`, // ProxyCurl API key
-                "Content-Type": "application/json",
-              },
-              params: params,
-            };
-            let userdata;
-            try {
-              const userdata_database = await axios.get(
-                api_endpoint,
-                (config = configuration)
-              );
-              userdata = userdata_database;
-              // console.log("gsgs");
-            } catch (error) {
-              return res
-                .status(500)
-                .json({ message: "Internal server error: " + error });
-            }
-            const about = userdata.data.summary;
-            if (Object.keys(userdata.data).length <= 3) {
-              return res
-                .status(404)
-                .json({ message: "Not enough data to create a team!" });
-            } else {
-              const experiences = userdata.data.experiences;
-              let final_experiences = "";
-              for (let i = 0; i < experiences.length; i++) {
-                final_experiences += `${userdata.data.experiences[i].company} ${userdata.data.experiences[i].title} ${userdata.data.experiences[i].description}`;
-              }
-              const sentence = final_experiences;
-
-              //  Extract the keywords
-              const extraction_result = keyword_extractor.extract(sentence, {
-                language: "english",
-                remove_digits: true,
-                return_changed_case: true,
-                remove_duplicates: false,
-              });
-              async function triggers() {
-                await Users.create({
-                  name: userdata.data.full_name,
-                  linkedin_url: linkedinurl,
-                  keywords: extraction_result,
-                  about: userdata.data.summary,
-                  room_id: JSON.stringify(`${roooms._id}`),
-                })
-                  .then((data) => {
-                    return res
-                      .status(200)
-                      .json({ message: "User created successfully!" });
-                  })
-                  .catch((err) => {
-                    return res.status(500).json({
-                      message: "Internal server error!" + err.message,
-                    });
-                  });
-              }
-              triggers();
-            }
-          } catch (err) {
+            const userdata_database = await axios.get(
+              api_endpoint,
+              (config = configuration)
+            );
+            userdata = userdata_database;
+            // console.log("gsgs");
+          } catch (error) {
+            return res
+              .status(500)
+              .json({ message: "Internal server error: " + error });
+          }
+          const about = userdata.data.summary;
+          if (Object.keys(userdata.data).length <= 3) {
             return res
               .status(404)
-              .json({ message: "Internal server error" + err.message });
+              .json({ message: "Not enough data to create a team!" });
+          } else {
+            const experiences = userdata.data.experiences;
+            let final_experiences = "";
+            for (let i = 0; i < experiences.length; i++) {
+              final_experiences += `${userdata.data.experiences[i].company} ${userdata.data.experiences[i].title} ${userdata.data.experiences[i].description}`;
+            }
+            const sentence = final_experiences;
+
+            //  Extract the keywords
+            const extraction_result = keyword_extractor.extract(sentence, {
+              language: "english",
+              remove_digits: true,
+              return_changed_case: true,
+              remove_duplicates: false,
+            });
+            async function triggers() {
+              await Users.create({
+                name: userdata.data.full_name,
+                linkedin_url: linkedinurl,
+                keywords: extraction_result,
+                about: userdata.data.summary,
+                room_id: JSON.stringify(`${roooms._id}`),
+              })
+                .then((data) => {
+                  return res
+                    .status(200)
+                    .json({ message: "User created successfully!" });
+                })
+                .catch((err) => {
+                  return res.status(500).json({
+                    message: "Internal server error!" + err.message,
+                  });
+                });
+            }
+            triggers();
           }
-        } else {
-          return res.status(200).json({ message: "Room Created Successfully" });
+        } catch (err) {
+          return res
+            .status(404)
+            .json({ message: "Internal server error" + err.message });
         }
 
         // const rex = await Users.findById(`${}`);
