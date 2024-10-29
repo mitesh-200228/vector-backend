@@ -18,7 +18,7 @@ function MainContoller() {
       }
       try {
         await Rooms.findById(`${room_id}`)
-          .then(async(data) => {
+          .then(async (data) => {
             if (data.length < 1) {
               return res.status(404).json({ message: "Wrong Room Number" });
             } else {
@@ -37,7 +37,10 @@ function MainContoller() {
                 params: params,
               };
               try {
-                const userdata_database = await axios.get(api_endpoint, (config = configuration));
+                const userdata_database = await axios.get(
+                  api_endpoint,
+                  (config = configuration)
+                );
                 userdata = userdata_database;
               } catch (error) {
                 return res
@@ -105,7 +108,7 @@ function MainContoller() {
       var linkedin_urls = [];
       let data_lake, main_user_about;
       try {
-        data_lake = await Users.find({ room_id });        
+        data_lake = await Users.find({ room_id });
         main_user_about = await Users.find({ linkedin_url });
         if (data_lake.length < 1) {
           return res
@@ -125,42 +128,44 @@ function MainContoller() {
           .status(500)
           .json({ message: "Internal Server Error " + error });
       }
-      const sentences = abouts;
+
+      // const sentences = abouts;
       function cosineSimilarity(vecA, vecB) {
         const dotProduct = vecA.reduce((sum, a, idx) => sum + a * vecB[idx], 0);
         const magnitudeA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
         const magnitudeB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
         return dotProduct / (magnitudeA * magnitudeB);
       }
-      let x = abouts;
+      const x = abouts;
+      if(main_user_about[0].about){
+        return res.status(404).json({message:'We dont have your enough data to show the result'});
+      }
       x.push(main_user_about[0].about);
+      var embedding_f = [];
       try {
-      const embeddings = await Promise.all(
-        sentences.map(async (sentence) => {
-          const response = await axios.post(
-            "https://api.openai.com/v1/embeddings",
-            { model: "text-embedding-ada-002", input: sentence },
-            {
-              headers: {
-                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-              },
-            }
-          );
-          return response.data.data[0].embedding;
-        })
-      );
-      const similarityMatrix = embeddings.map((embeddingA) =>
-        cosineSimilarity(embeddings[embeddings.length - 1], embeddingA)
-      );
-      // return res.status(200).json({
-      //   matrix: [0.7736036995470287, 0.7458996094393071, 1, 1],
-      //   names: ["Siddhant Patole", "Souvik Sengupta", "Mitesh Bediya"],
-      // });
-      return res.status(200).json({ matrix: similarityMatrix, names });
+        await Promise.all(
+          x.map(async (sentence) => {
+            const response = await axios.post(
+              "https://api.openai.com/v1/embeddings",
+              { model: "text-embedding-ada-002", input: sentence },
+              {
+                headers: {
+                  Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+                },
+              }
+            );
+            embedding_f.push(response.data.data[0].embedding);
+            return response.data.data[0].embedding;
+          })
+        );
+        const similarityMatrix = embedding_f.map((embeddingA) =>
+          cosineSimilarity(embedding_f[embedding_f.length - 1], embeddingA)
+        );
+        return res.status(200).json({ matrix: similarityMatrix, names });
       } catch (error) {
-        res
-          .status(500)
-          .json({ error: "Failed to calculate similarity matrix." + error });
+        return res.status(500).json({
+          error: "Failed to calculate similarity matrix." + error.message,
+        });
       }
     },
     async rooms(req, res) {
