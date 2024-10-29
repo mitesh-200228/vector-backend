@@ -137,7 +137,7 @@ function MainContoller() {
         return dotProduct / (magnitudeA * magnitudeB);
       }
       const x = abouts;
-      if(main_user_about[0].about){
+      if(main_user_about[0].about === null){
         return res.status(404).json({message:'We dont have your enough data to show the result'});
       }
       x.push(main_user_about[0].about);
