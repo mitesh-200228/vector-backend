@@ -137,34 +137,34 @@ function MainContoller() {
       }
       let x = abouts;
       x.push(main_user_about[0].about);
-      // try {
-      // const embeddings = await Promise.all(
-      //   sentences.map(async (sentence) => {
-      //     const response = await axios.post(
-      //       "https://api.openai.com/v1/embeddings",
-      //       { model: "text-embedding-ada-002", input: sentence },
-      //       {
-      //         headers: {
-      //           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      //         },
-      //       }
-      //     );
-      //     return response.data.data[0].embedding;
-      //   })
-      // );
-      // const similarityMatrix = embeddings.map((embeddingA) =>
-      //   cosineSimilarity(embeddings[embeddings.length - 1], embeddingA)
-      // );
-      return res.status(200).json({
-        matrix: [0.7736036995470287, 0.7458996094393071, 1, 1],
-        names: ["Siddhant Patole", "Souvik Sengupta", "Mitesh Bediya"],
-      });
-      // return res.status(200).json({ matrix: similarityMatrix, names });
-      // } catch (error) {
-      //   res
-      //     .status(500)
-      //     .json({ error: "Failed to calculate similarity matrix." + error });
-      // }
+      try {
+      const embeddings = await Promise.all(
+        sentences.map(async (sentence) => {
+          const response = await axios.post(
+            "https://api.openai.com/v1/embeddings",
+            { model: "text-embedding-ada-002", input: sentence },
+            {
+              headers: {
+                Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+              },
+            }
+          );
+          return response.data.data[0].embedding;
+        })
+      );
+      const similarityMatrix = embeddings.map((embeddingA) =>
+        cosineSimilarity(embeddings[embeddings.length - 1], embeddingA)
+      );
+      // return res.status(200).json({
+      //   matrix: [0.7736036995470287, 0.7458996094393071, 1, 1],
+      //   names: ["Siddhant Patole", "Souvik Sengupta", "Mitesh Bediya"],
+      // });
+      return res.status(200).json({ matrix: similarityMatrix, names });
+      } catch (error) {
+        res
+          .status(500)
+          .json({ error: "Failed to calculate similarity matrix." + error });
+      }
     },
     async rooms(req, res) {
       const { linkedin_url, room_name, room_description } = req.body;
