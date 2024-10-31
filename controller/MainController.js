@@ -110,13 +110,15 @@ function MainContoller() {
       try {
         data_lake = await Users.find({ room_id });
         main_user_about = await Users.find({ linkedin_url });
+        console.log(main_user_about);
+        
         if (data_lake.length < 1) {
           return res
             .status(200)
             .json({ message: "No users in the data lake!" });
         } else {
           for (let i = 0; i < data_lake.length; i++) {
-            if (data_lake[i].linkedin_url !== linkedin_url) {
+            // if (data_lake[i].linkedin_url !== linkedin_url) {
               if (data_lake[i].about === null) {
                 abouts.push(" ");
                 names.push(data_lake[i].name);
@@ -126,7 +128,7 @@ function MainContoller() {
                 names.push(data_lake[i].name);
                 linkedin_urls.push(data_lake[i].linkedin_url);
               }
-            }
+            // }
           }
         }
       } catch (error) {
@@ -142,8 +144,8 @@ function MainContoller() {
         return dotProduct / (magnitudeA * magnitudeB);
       }
       const x = abouts;
-      x.push(main_user_about[0].about? main_user_about[0].about : ' ');
-      console.log(x);
+      x.push(main_user_about[0].about ? main_user_about[0].about : ' ');
+      // console.log(x);
 
       try {
         const embeddings = await Promise.all(
