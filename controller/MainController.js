@@ -19,7 +19,7 @@ function MainContoller() {
       try {
         await Rooms.findById(`${room_id}`)
           .then(async (data) => {
-            if (data.length < 1) {
+            if (data === null) {
               return res.status(404).json({ message: "Wrong Room Number" });
             } else {
               let api_endpoint = "https://nubela.co/proxycurl/api/v2/linkedin";
@@ -117,13 +117,18 @@ function MainContoller() {
         } else {
           for (let i = 0; i < data_lake.length; i++) {
             if (data_lake[i].linkedin_url !== linkedin_url) {
-              abouts.push(data_lake[i].about);
-              names.push(data_lake[i].name);
-              linkedin_urls.push(data_lake[i].linkedin_url);
+              if (data_lake[i].about === null) {
+                abouts.push(" ");
+                names.push(data_lake[i].name);
+                linkedin_urls.push(data_lake[i].linkedin_url);
+              } else {
+                abouts.push(data_lake[i].about);
+                names.push(data_lake[i].name);
+                linkedin_urls.push(data_lake[i].linkedin_url);
+              }
             }
           }
         }
-        console.log(names);
       } catch (error) {
         return res
           .status(500)
@@ -137,7 +142,8 @@ function MainContoller() {
         return dotProduct / (magnitudeA * magnitudeB);
       }
       const x = abouts;
-      x.push(main_user_about[0].about);
+      x.push(main_user_about[0].about? main_user_about[0].about : ' ');
+      console.log(x);
 
       try {
         const embeddings = await Promise.all(
@@ -283,6 +289,32 @@ function MainContoller() {
         return res
           .status(500)
           .json({ message: "Internal server error" + err.message });
+      }
+    },
+    async getRoomDetails(req, res) {
+      const { room_id } = req.body;
+      function extractNameFromLinkedInUrl(url) {
+        const parts = url.replace(/\/+$/, "").split("/");
+        if (
+          parts.length >= 4 &&
+          parts[2].includes("linkedin.com") &&
+          parts[3] === "in"
+        ) {
+          return parts[4];
+        } else {
+          throw new Error("Invalid LinkedIn profile URL format");
+        }
+      }
+      try {
+        await Rooms.findById(`${room_id}`).then((data) => {
+          console.log(data);
+          
+          return res
+            .status(200)
+            .json({ message: extractNameFromLinkedInUrl(data.People[0]) });
+        });
+      } catch (error) {
+        return res.status(500).json({ message: "Internal server error" + error });
       }
     },
   };

@@ -6,6 +6,7 @@ function rest(app) {
     app.post('/matcher',MainContoller().matcher);
     app.post('/rooms',MainContoller().rooms);
     app.get('/allrooms',MainContoller().fetchAllRoom);
+    app.post('/getroomdetails',MainContoller().getRoomDetails);
 }
 
 module.exports = rest;
