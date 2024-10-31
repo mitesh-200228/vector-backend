@@ -116,18 +116,14 @@ function MainContoller() {
             .json({ message: "No users in the data lake!" });
         } else {
           for (let i = 0; i < data_lake.length; i++) {
-            console.log(data_lake[i]);
-            console.log(main_user_about[i]);
-
             if (data_lake[i].linkedin_url !== linkedin_url) {
-              console.log(data_lake[i]);
-
               abouts.push(data_lake[i].about);
               names.push(data_lake[i].name);
               linkedin_urls.push(data_lake[i].linkedin_url);
             }
           }
         }
+        console.log(names);
       } catch (error) {
         return res
           .status(500)
