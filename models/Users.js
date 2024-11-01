@@ -5,6 +5,10 @@ const Users = new mongoose.Schema({
         type: String,
         required: true,
     },
+    profile_pic:{
+        type: String,
+        required: false,
+    },
     linkedin_url: {
         type: String,
         required: true,

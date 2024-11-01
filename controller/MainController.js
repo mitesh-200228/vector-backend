@@ -40,9 +40,11 @@ function MainContoller() {
                 const userdata_database = await axios.get(
                   api_endpoint,
                   (config = configuration)
-                );
+                );  
                 userdata = userdata_database;
               } catch (error) {
+                console.log(error);
+                
                 return res
                   .status(500)
                   .json({ message: "Internal server error: " + error });
@@ -72,6 +74,7 @@ function MainContoller() {
                 await Users.create({
                   name: userdata.data.full_name,
                   linkedin_url: linkedinurl,
+                  profile_pic: userdata.data.profile_pic_url,
                   keywords: extraction_result,
                   about: userdata.data.summary,
                   room_id: room_id,
@@ -106,11 +109,11 @@ function MainContoller() {
       var abouts = [];
       var names = [];
       var linkedin_urls = [];
+      var profile_pics = [];
       let data_lake, main_user_about;
       try {
         data_lake = await Users.find({ room_id });
         main_user_about = await Users.find({ linkedin_url });
-        console.log(main_user_about);
         
         if (data_lake.length < 1) {
           return res
@@ -119,15 +122,17 @@ function MainContoller() {
         } else {
           for (let i = 0; i < data_lake.length; i++) {
             // if (data_lake[i].linkedin_url !== linkedin_url) {
-              if (data_lake[i].about === null) {
-                abouts.push(" ");
-                names.push(data_lake[i].name);
-                linkedin_urls.push(data_lake[i].linkedin_url);
-              } else {
-                abouts.push(data_lake[i].about);
-                names.push(data_lake[i].name);
-                linkedin_urls.push(data_lake[i].linkedin_url);
-              }
+            if (data_lake[i].about === null) {
+              abouts.push(" ");
+              names.push(data_lake[i].name);
+              linkedin_urls.push(data_lake[i].linkedin_url);
+              profile_pics.push(" ");
+            } else {
+              abouts.push(data_lake[i].about);
+              names.push(data_lake[i].name);
+              linkedin_urls.push(data_lake[i].linkedin_url);
+              profile_pics.push(data_lake[i].profile_pic);
+            }
             // }
           }
         }
@@ -144,7 +149,7 @@ function MainContoller() {
         return dotProduct / (magnitudeA * magnitudeB);
       }
       const x = abouts;
-      x.push(main_user_about[0].about ? main_user_about[0].about : ' ');
+      x.push(main_user_about[0].about ? main_user_about[0].about : " ");
       // console.log(x);
 
       try {
@@ -167,7 +172,7 @@ function MainContoller() {
         const similarityMatrix = embeddings.map((embeddingA) =>
           cosineSimilarity(embeddings[embeddings.length - 1], embeddingA)
         );
-        return res.status(200).json({ matrix: similarityMatrix, names });
+        return res.status(200).json({ matrix: similarityMatrix, names, profile_pics });
       } catch (error) {
         return res.status(500).json({
           error: "Failed to calculate similarity matrix. " + error.message,
@@ -246,6 +251,7 @@ function MainContoller() {
               await Users.create({
                 name: userdata.data.full_name,
                 linkedin_url: linkedinurl,
+                profile_pic: userdata.data.profile_pic_url,
                 keywords: extraction_result,
                 about: userdata.data.summary,
                 room_id: JSON.stringify(`${roooms._id}`),
@@ -308,15 +314,16 @@ function MainContoller() {
         }
       }
       try {
-        await Rooms.findById(`${room_id}`).then((data) => {
-          console.log(data);
-          
-          return res
-            .status(200)
-            .json({ message: extractNameFromLinkedInUrl(data.People[0]) });
+        await Rooms.findById(`${room_id}`).then(async(data) => {
+          const user_linkedin_profile = data.People[0];
+          const users = await Users.find({'linkedin_url':`${user_linkedin_profile}`,'room_id':`${room_id}`});
+          const final_payload = users[0].profile_pic;
+          return res.status(200).json({message: [extractNameFromLinkedInUrl(data.People[0]),final_payload]});
         });
       } catch (error) {
-        return res.status(500).json({ message: "Internal server error" + error });
+        return res
+          .status(500)
+          .json({ message: "Internal server error" + error });
       }
     },
   };
